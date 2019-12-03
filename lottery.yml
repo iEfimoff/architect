@@ -22,3 +22,13 @@ services:
       - ./frontend:/src
     ports:
       - 3000:3000
+
+  swagger:
+    container_name: swagger
+    image: swaggerapi/swagger-ui
+    environment:
+      - SWAGGER_JSON=/swagger.api.yml
+    ports:
+      - 5001:8080
+    volumes:
+      - ./backend/swagger.api.yml:/swagger.api.yml

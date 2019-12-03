@@ -17,15 +17,15 @@ router.get('/', (req, res) => {
   res.json(users)
 })
 
-const genrate6digits = () => {
-  return Math.round(100000 + Math.random() * 900000)
+const generate6digits = () => {
+  return Math.round(Math.random() * 900000) + 100000
 }
 
 router.post('/', (req, res) => {
   const user = req.param('user')
   const pass = req.param('pass')
   const email = req.param('email')
-  const passcode = genrate6digits()
+  const passcode = generate6digits()
   // TODO validate user name
   // TODO validate user password
   // TODO validate user email
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
   users.push({
     id: md5(Date.now()),
     name: user,
-    pass: md5(user) + md5(pass),
+    pass: md5(user + pass),
     email,
     passcode
   })

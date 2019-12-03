@@ -1,0 +1,24 @@
+version: "2.2"
+
+services:
+  backend:
+    image: node:alpine
+    container_name: backend
+    entrypoint: "npm start --prefix /src"
+    environment:
+      - PORT=5000
+      - ADMIN_USER_NAME=admin
+      - ADMIN_USER_PASSWORD=123
+    volumes:
+      - ./backend:/src
+    ports:
+      - 5000:5000
+
+  frontend:
+    image: node:alpine
+    container_name: frontend
+    entrypoint: "npm start --prefix /src"
+    volumes:
+      - ./frontend:/src
+    ports:
+      - 3000:3000

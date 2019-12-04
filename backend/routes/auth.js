@@ -1,12 +1,16 @@
 const express = require('express')
 const md5 = require('md5')
+const randomString = require('crypto-random-string')
+const users = require('./user').users
 
 const router = express.Router()
 
 const sessions = []
 
-const auth = (user, pass) => {
-  return users.filter(user => user.name === user && pass === md5(user + pass)).length === 1
+const auth = (username, pass) => {
+  return users.filter(user => {
+    return user.name === username && user.pass === md5(username + pass)
+  }).length === 1
 }
 
 router.get('/', (req, res) => {
@@ -14,13 +18,18 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const user = req.param('user')
-  const pass = req.param('pass')
-  if (auth(user, pass)) {
-    const session = md5(Date.now()) + md5(user + Date.now())
+  const username = req.body.user
+  const password = req.body.pass
+  if (auth(username, password)) {
+    const sessionId = randomString({length: 50})
     sessions.push({
-      id: users.filter(user => user.name === name)[0].id,
-      session
+      userId: users.filter(user => user.name === username)[0].id,
+      sessionId
+    })
+    res.json(sessionId)
+  } else {
+    res.json({
+      error: 'incorrect user or password'
     })
   }
 })

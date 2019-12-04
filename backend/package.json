@@ -9,6 +9,8 @@
   "author": "Ivan Efimov",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "crypto-random-string": "^3.0.1",
     "express": "^4.17.1",
     "nodemon": "^2.0.1",
     "md5": "^2.2.1"

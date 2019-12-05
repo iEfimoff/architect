@@ -88,7 +88,7 @@ paths:
         - in: formData
           name: email
           type: string
-          description: Password
+          description: E-mail
       responses:
         '200':
           description: OK
@@ -97,7 +97,7 @@ paths:
       tags:
         - user
         - debug
-      summary: Returns a list of wallets
+      summary: Returns a list of wallets.
       responses:
         '200':
           description: OK
@@ -105,7 +105,7 @@ paths:
       tags:
         - user
         - auth cookie
-      summary: Creates a new wallet
+      summary: Creates a new wallet.
       consumes:
         - application/x-www-form-urlencoded
       responses:

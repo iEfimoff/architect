@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
-import './app.css';
+import React, { Component } from 'react'
+import { Route, NavLink, HashRouter } from "react-router-dom"
+import Login from '../login'
+import Home from '../home'
+import './app.css'
 
 class App extends Component {
   state = {
@@ -11,7 +14,7 @@ class App extends Component {
       .then(res => this.setState({ data: res.win }))
       .catch(err => console.log(err))
   }
-  
+
   callBackendAPI = async () => {
     const response = await fetch('/loterry')
     const body = await response.json()
@@ -23,9 +26,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        Welcome to React
-      </div>
+      <HashRouter>
+        <div>
+          <h1>Bitcoin loterry</h1>
+          <ul className="header">
+            <li><NavLink to="/login">Login</NavLink></li>
+            <li><NavLink to="/home">Home</NavLink></li>
+          </ul>
+          <div className="content">
+            <Route path="/login" component={Login} />
+            <Route path="/home" component={Home} />
+          </div>
+        </div>
+      </HashRouter>
     )
   }
 }

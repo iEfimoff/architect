@@ -120,7 +120,7 @@ paths:
     post:
       tags:
         - notification
-      summary: Sends push notification and email.
+      summary: Sends push and email notification.
       parameters:
         - in: formData
           name: to
@@ -158,24 +158,6 @@ paths:
           name: message
           type: string
           description: Text of the e-mail message.
-  /push:
-    get:
-      tags:
-        - debug
-        - notification
-      summary: Shows subscription endpoint.
-      responses:
-        '200':
-          description: OK
-  /push/public/key:
-    get:
-      tags:
-        - debug
-        - notification
-      summary: Shows public key for subscription endpoint.
-      responses:
-        '200':
-          description: OK
   /push/send:
     post:
       tags:
@@ -193,11 +175,29 @@ paths:
       responses:
         '200':
           description: OK
-  /push/save:
+  /push/public/key:
+    get:
+      tags:
+        - debug
+        - notification
+      summary: Shows public key for subscription endpoint.
+      responses:
+        '200':
+          description: OK
+  /push/get/subscription:
+    get:
+      tags:
+        - debug
+        - notification
+      summary: Shows subscription endpoint.
+      responses:
+        '200':
+          description: OK
+  /push/save/subscription:
     post:
       tags:
         - notification
-      summary: Saves push notifications.
+      summary: Saves user`s subscripion endpoint.
       requestBody:
         content:
           text/html:

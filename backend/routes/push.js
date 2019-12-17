@@ -4,47 +4,48 @@ const router = express.Router()
 
 const db = { subscription: null }
 
-const send = async (subscription, data = '') => {
-  try {
-    await webpush.sendNotification(subscription, data)
-  } catch (e) {
-    console.log('push.send', e)
-  }
+const send_notification = async (subscription, data = '') => {
+  return await webpush.sendNotification(subscription, data)
 }
 
-const save = async subscription => {
+const { PUSH_PUBLIC_KEY, PUSH_PRIVATE_KEY } = process.env
+
+const save_subscription = async subscription => {
   db.subscription = subscription
 }
 
 webpush.setVapidDetails(
-  'http://web.push.notification.test',
-  process.env.PUSH_PUBLIC_KEY,
-  process.env.PUSH_PRIVATE_KEY
+  'http://web.push.notification.test.new',
+  PUSH_PUBLIC_KEY,
+  PUSH_PRIVATE_KEY
 )
 
-router.get('/', (req, res) => {
+router.get('/public/key', (req, res) => {
+  res.send(PUSH_PUBLIC_KEY)
+})
+
+router.get('/get/subscription', (req, res) => {
   res.json(db)
 })
 
-router.get('/public/key', (req, res) => {
-  res.send(process.env.PUSH_PUBLIC_KEY)
-})
-
-router.post('/save', async (req, res) => {
+router.post('/save/subscription', async (req, res) => {
   const subscription = req.body
-  await save(subscription)
+  await save_subscription(subscription)
   res.json({ status: 'success' })
 })
 
 router.post('/send', async (req, res) => {
   const subscription = db.subscription
-  const title = req.body.title
-  const message = req.body.message
-  await send(subscription, JSON.stringify({
-    title,
-    message
-  }))
-  res.json({ status: 'message sent' })
+  const { title, message } = req.body
+  try {
+    await send_notification(subscription, JSON.stringify({
+      title,
+      message
+    }))
+    res.json({ status: 'message sent' })
+  } catch (e) {
+    res.json({ error: e })
+  }
 })
 
 module.exports = router

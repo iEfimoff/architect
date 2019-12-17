@@ -3,22 +3,27 @@ const nodemailer = require('nodemailer')
 
 const router = express.Router()
 
+const {
+  SMTP_HOST,
+  SMTP_PORT,
+  SMTP_USER_NAME,
+  SMTP_USER_PASSWORD
+} = process.env
+
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
+  host: SMTP_HOST,
+  port: SMTP_PORT,
   secure: false,
   auth: {
-    user: process.env.SMTP_USER_NAME,
-    pass: process.env.SMTP_USER_PASSWORD
+    user: SMTP_USER_NAME,
+    pass: SMTP_USER_PASSWORD
   }
 })
 
 router.post('/', (req, res) => {
-  const to = req.body.to
-  const subject = req.body.subject
-  const message = req.body.message
+  const { to, subject, message } = req.body
   transporter.sendMail({
-    from: process.env.SMTP_USER_NAME,
+    from: SMTP_USER_NAME,
     to,
     subject,
     text: message

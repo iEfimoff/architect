@@ -18,10 +18,9 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const username = req.body.user
-  const password = req.body.pass
+  const { username, pass: password } = req.body
   if (auth(username, password)) {
-    const sessionId = randomString({length: 50})
+    const sessionId = randomString({ length: 50 })
     sessions.push({
       userId: users.filter(user => user.name === username)[0].id,
       sessionId

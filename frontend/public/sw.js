@@ -11,7 +11,7 @@ const urlB64ToUint8Array = base64String => {
 
 const saveSubscription = async subscription => {
   console.log(subscription)
-  const response = await fetch('/push/save', {
+  const response = await fetch('/push/save/subscription', {
     method: "post",
     headers: {
       "Content-Type": "application/json"
@@ -44,6 +44,7 @@ self.addEventListener('push', function (event) {
     console.log('Push event but no data')
   }
 })
+
 const showLocalNotification = (title, body, swRegistration) => {
   const options = {
     body,

@@ -4,7 +4,7 @@ services:
   backend:
     image: node:alpine
     container_name: backend
-    entrypoint: "npm start --prefix /src"
+    entrypoint: 'sh -c "npm install --prefix /src && npm start --prefix /src"'
     environment:
       - PORT=5000
       - ADMIN_USER_NAME=admin
@@ -13,8 +13,8 @@ services:
       - SMTP_PORT=2525
       - SMTP_USER_NAME=otus.test@mail.ru
       - SMTP_USER_PASSWORD=rdtsc0f31
-      - PUSH_PUBLIC_KEY=BEaS-dIxzeEOAebAizEmzxIsZmJ4NDuUFexpauuWZn7MiVOHn1wYwB4FoC_TmxilOVM3oRrUBWgkZ2pSbOLjDYw
-      - PUSH_PRIVATE_KEY=RpyWiKqRR5Etm29UxvqOg-P-lswiWv_Qoy6Yv2DQ3J0
+      - PUSH_PUBLIC_KEY=BFLTBLOGL5ltfKdoFXqX2QsK-KbPmSjfJNc6lrSRTBP_nnahGNp8kNuNgTm2iIjGpx0jGUnvfp_0eP9zbqTSNBI
+      - PUSH_PRIVATE_KEY=tLJg8xlUBQ8VGlIZP4EHEZLEPJXDbffhRduDXghtmXo
     volumes:
       - ./backend:/src
     ports:
@@ -23,7 +23,7 @@ services:
   frontend:
     image: node:alpine
     container_name: frontend
-    entrypoint: "npm start --prefix /src"
+    entrypoint: 'sh -c "npm install --prefix /src && npm start --prefix /src"'
     volumes:
       - ./frontend:/src
     ports:

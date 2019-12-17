@@ -116,3 +116,93 @@ paths:
           name: userId
           type: string
           description: User unique identificator
+  /notification:
+    post:
+      tags:
+        - notification
+      summary: Sends push notification and email.
+      parameters:
+        - in: formData
+          name: to
+          type: string
+          description: Recipient email address.
+        - in: formData
+          name: title
+          type: string
+          description: Title of the notification.
+        - in: formData
+          name: message
+          type: string
+          description: Message of the notification.
+      responses:
+        '200':
+          description: OK
+  /mail:
+    post:
+      tags:
+        - notification
+      summary: Sends e-mail notification.
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - in: formData
+          name: to
+          type: string
+          description: Recipient email address.
+        - in: formData
+          name: subject
+          type: string
+          description: Subject of the e-mail message.
+        - in: formData
+          name: message
+          type: string
+          description: Text of the e-mail message.
+  /push:
+    get:
+      tags:
+        - debug
+        - notification
+      summary: Shows subscription endpoint.
+      responses:
+        '200':
+          description: OK
+  /push/public/key:
+    get:
+      tags:
+        - debug
+        - notification
+      summary: Shows public key for subscription endpoint.
+      responses:
+        '200':
+          description: OK
+  /push/send:
+    post:
+      tags:
+        - notification
+      summary: Sends push notifications to the client browser.
+      parameters:
+        - in: formData
+          name: title
+          type: string
+          description: Title of the notification.
+        - in: formData
+          name: message
+          type: string
+          description: Message of the notification.
+      responses:
+        '200':
+          description: OK
+  /push/save:
+    post:
+      tags:
+        - notification
+      summary: Saves push notifications.
+      requestBody:
+        content:
+          text/html:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK

@@ -9,6 +9,12 @@ services:
       - PORT=5000
       - ADMIN_USER_NAME=admin
       - ADMIN_USER_PASSWORD=123
+      - SMTP_HOST=smtp.mail.ru
+      - SMTP_PORT=2525
+      - SMTP_USER_NAME=otus.test@mail.ru
+      - SMTP_USER_PASSWORD=rdtsc0f31
+      - PUSH_PUBLIC_KEY=BEaS-dIxzeEOAebAizEmzxIsZmJ4NDuUFexpauuWZn7MiVOHn1wYwB4FoC_TmxilOVM3oRrUBWgkZ2pSbOLjDYw
+      - PUSH_PRIVATE_KEY=RpyWiKqRR5Etm29UxvqOg-P-lswiWv_Qoy6Yv2DQ3J0
     volumes:
       - ./backend:/src
     ports:

@@ -9,6 +9,7 @@ class App extends Component {
     data: null
   }
 
+  /*
   componentDidMount() {
     this.callBackendAPI()
       .then(res => this.setState({ data: res.win }))
@@ -23,6 +24,7 @@ class App extends Component {
     }
     return body
   }
+*/
 
   render() {
     return (

@@ -37,7 +37,6 @@ router.post('/save', async (req, res) => {
 })
 
 router.post('/send', async (req, res) => {
-  console.log(req.body)
   const subscription = db.subscription
   const title = req.body.title
   const message = req.body.message

@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { username, pass: password } = req.body
+  const { user: username, pass: password } = req.body
   if (auth(username, password)) {
     const sessionId = randomString({ length: 50 })
     sessions.push({
